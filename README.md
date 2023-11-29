@@ -1,4 +1,4 @@
-# git-janitor
+# Git Janitor (bash)
 Bulk update all your local git repos from different directories even if they require sudo
 
 ## Repos with elevated permissions 
