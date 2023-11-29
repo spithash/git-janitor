@@ -35,6 +35,7 @@ is_repo_up_to_date() {
 }
 
 # Local Git repositories
+# Add true if it requires sudo and false if otherwise
 update_git_repos() {
     local repo_directories=(
         "/usr/share/coreruleset true"
