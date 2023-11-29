@@ -8,8 +8,7 @@ sudo_git_command() {
     local command=("$@")
 
     if [ "$use_sudo" = true ]; then
-        cmd=("cd" "$directory" "&&" "${command[@]}")
-        sudo -S bash -c "${cmd[*]}"
+        sudo bash -c 'cd "$1" || exit ; shift ; "$@"' bash "$directory" "${command[@]}"
     else
         (cd "$directory" && "${command[@]}")
     fi
