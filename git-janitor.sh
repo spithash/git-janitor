@@ -34,7 +34,7 @@ is_repo_up_to_date() {
     fi
 }
 
-# Local Git repositories
+# Local Git repositories (you SHOULD change these)
 # Add true if it requires sudo and false if otherwise
 update_git_repos() {
     local repo_directories=(
