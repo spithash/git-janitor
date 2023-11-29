@@ -24,7 +24,7 @@ is_repo_up_to_date() {
     fetch_dry_run_output=$(sudo_git_command "git -C $directory fetch --dry-run" "$directory" false)
 
     # Add debugging output
-    echo "Debug - Fetch dry-run output for $directory: $fetch_dry_run_output"
+    echo "[*] - Fetch dry-run output for $directory: $fetch_dry_run_output"
 
     # Check if the fetch dry-run output indicates that there are no changes
     if [[ "$fetch_dry_run_output" == *"Already up to date."* ]]; then
@@ -63,7 +63,7 @@ update_git_repos() {
             return_code=$?
 
             # Add debugging output
-            echo "Debug - Show branch output for $directory: $pull_result"
+            echo "[*] - Show branch output for $directory: $pull_result"
 
             if [[ "$pull_result" == *"Already up to date."* ]]; then
                 already_up_to_date+=("$directory")
