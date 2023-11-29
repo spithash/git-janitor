@@ -2,15 +2,16 @@
 
 # Execute git with sudo if needed
 sudo_git_command() {
-    local command="$1"
-    local directory="$2"
-    local use_sudo="$3"
+    local directory="$1"
+    local use_sudo="$2"
+    shift 2
+    local command=("$@")
 
     if [ "$use_sudo" = true ]; then
-        cmd=("cd" "$directory" "&&" "$command")
+        cmd=("cd" "$directory" "&&" "${command[@]}")
         sudo -S bash -c "${cmd[*]}"
     else
-        $command
+        (cd "$directory" && "${command[@]}")
     fi
 }
 
@@ -19,7 +20,7 @@ is_repo_up_to_date() {
     local directory="$1"
 
     # Check if there are changes without actually updating the local branches
-    fetch_dry_run_output=$(sudo_git_command "git -C $directory fetch --dry-run" "$directory" false)
+    fetch_dry_run_output=$(sudo_git_command "$directory" false git fetch --dry-run)
 
     # Add debugging output
     echo "[*] - Fetch dry-run output for $directory: $fetch_dry_run_output"
@@ -57,7 +58,7 @@ update_git_repos() {
             already_up_to_date+=("$directory")
         else
             # There are changes, proceed with the actual update
-            pull_result=$(sudo_git_command "git -C $directory pull" "$directory" "$use_sudo")
+            pull_result=$(sudo_git_command "$directory" "$use_sudo" git pull)
             return_code=$?
 
             # Add debugging output
@@ -91,4 +92,3 @@ update_git_repos() {
 }
 
 update_git_repos
-
