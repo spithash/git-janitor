@@ -7,10 +7,8 @@ sudo_git_command() {
     local use_sudo="$3"
 
     if [ "$use_sudo" = true ]; then
-        read -rsp "Enter sudo password for $directory: " password
-        echo
         cmd=("cd" "$directory" "&&" "$command")
-        sudo -S bash -c "${cmd[*]}" <<< "$password"
+        sudo -S bash -c "${cmd[*]}"
     else
         $command
     fi
