@@ -42,7 +42,6 @@ update_git_repos() {
         "/home/spithash/.tmux/plugins/tpm false"
         "/home/spithash/MySQLTuner-perl false"
         "/home/spithash/.nvm/ false"
-        "/home/spithash/Documents/deleteme/custom-conf-files false"
     )
 
     updated_repos=()
