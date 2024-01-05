@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check if script is run as root
+if [[ $EUID -eq 0 ]]; then
+    echo "This script should not be run as root."
+    exit 1
+fi
+
 # Execute git with sudo if needed
 sudo_git_command() {
     local directory="$1"
